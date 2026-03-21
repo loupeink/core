@@ -1,0 +1,32 @@
+{
+  "name": "@loupe/core",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.ts", "default": "./dist/index.cjs" }
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "zustand": "^5.0.0",
+    "@supabase/supabase-js": "^2.99.2"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "~5.7.0",
+    "vitest": "^2.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
