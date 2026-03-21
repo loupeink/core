@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-// These imports will fail until Wave 1 extracts types to @loupe/core
+// These imports will fail until Wave 1 extracts types to @loupeink/core
 import type { WindowInfo, ProjectType, Project, AnnotationShape, FeedbackPoint, OverlayPosition } from '../types/project';
 import { createInitialState, addShape, undo, redo, replaceShape, clearAll } from '../annotation/annotationState';
 

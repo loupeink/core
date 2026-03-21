@@ -1,4 +1,4 @@
-// @loupe/core — Platform-agnostic shared types, stores, and services
+// @loupeink/core — Platform-agnostic shared types, stores, and services
 
 // Types
 export type { WindowInfo, ProjectType, Project, AnnotationShape, FeedbackPoint, OverlayPosition } from './types/project';
