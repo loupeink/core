@@ -36,6 +36,7 @@ export interface FeedbackPoint {
   screenshotPath?: string;
   annotatedScreenshotPath?: string;
   annotations?: AnnotationShape[];
+  status?: string;  // read-only on desktop; set by dashboard workflow via PATCH API
   createdAt: string;
 }
 
