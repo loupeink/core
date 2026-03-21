@@ -19,3 +19,6 @@ export { LocalStorageQueueStorage } from './queue/localStorage';
 
 // Storage
 export { uploadScreenshotBytes } from './storage/storageUpload';
+
+// Sync service
+export { ensureCompany, ensureProject, syncFeedbackItem, deleteFeedbackItem, syncProject } from './sync/syncService';
