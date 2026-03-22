@@ -9,7 +9,7 @@ export type ProjectType = "video" | "design" | "website" | "general";
 export interface Project {
   id: string;
   name: string;
-  title: string;
+  description?: string;   // optional short description
   projectType?: ProjectType;
   createdAt: string;
   updatedAt: string;

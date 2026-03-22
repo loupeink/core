@@ -6,7 +6,7 @@ import { createInitialState, addShape, undo, redo, replaceShape, clearAll } from
 describe('types — CORE-02', () => {
   it('Project shape is correct', () => {
     const p: Project = {
-      id: 'p1', name: 'Test', title: 'Test Project',
+      id: 'p1', name: 'Test', description: 'Test description',
       createdAt: '2026-01-01', updatedAt: '2026-01-01', feedbackPoints: [],
     };
     expect(p.id).toBe('p1');

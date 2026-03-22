@@ -53,7 +53,7 @@ export async function ensureProject(
         company_id: companyId,
         created_by: createdBy,
         name: localProject.name,
-        title: localProject.title,
+        description: localProject.description ?? null,
         project_type: localProject.projectType ?? "general",
         source: "desktop",
       },
