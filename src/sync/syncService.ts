@@ -162,6 +162,34 @@ export async function deleteFeedbackItem(
   }
 }
 
+// ─── deleteProject ────────────────────────────────────────────────────────────
+
+export async function deleteProject(
+  supabase: SupabaseClient,
+  projectId: string,
+): Promise<void> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+
+  try {
+    // Delete all feedback items for this project first
+    const { error: fbError } = await supabase
+      .from("feedback_items")
+      .delete()
+      .eq("project_id", projectId);
+    if (fbError) console.error("[deleteProject] feedback delete failed:", fbError.message);
+
+    // Delete the project record
+    const { error } = await supabase
+      .from("projects")
+      .delete()
+      .eq("id", projectId);
+    if (error) console.error("[deleteProject] DB delete failed:", error.message);
+  } catch (err) {
+    console.error("[deleteProject] failed:", err);
+  }
+}
+
 // ─── syncProject ──────────────────────────────────────────────────────────────
 
 export async function syncProject(supabase: SupabaseClient, project: Project): Promise<void> {
