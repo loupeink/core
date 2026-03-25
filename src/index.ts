@@ -5,7 +5,7 @@ export type { WindowInfo, ProjectType, Project, AnnotationShape, FeedbackPoint, 
 
 // Annotation state
 export type { AnnotationState } from './annotation/annotationState';
-export { createInitialState, addShape, undo, redo, replaceShape, clearAll } from './annotation/annotationState';
+export { createInitialState, addShape, undo, redo, replaceShape, removeShape, clearAll } from './annotation/annotationState';
 
 // Stores
 export { useSyncStore } from './stores/syncStore';

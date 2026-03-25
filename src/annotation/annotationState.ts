@@ -57,6 +57,19 @@ export function replaceShape(
   };
 }
 
+export function removeShape(
+  state: AnnotationState,
+  index: number,
+): AnnotationState {
+  const removed = state.shapes[index];
+  if (!removed) return state;
+  const shapes = state.shapes.filter((_, i) => i !== index);
+  return {
+    shapes,
+    redoStack: [...state.redoStack, removed],
+  };
+}
+
 export function clearAll(_state: AnnotationState): AnnotationState {
   return {
     shapes: [],
