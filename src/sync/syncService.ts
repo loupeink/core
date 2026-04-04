@@ -93,13 +93,11 @@ export async function syncFeedbackItem(
   let uploadedAnnotatedPath: string | undefined;
 
   const ct = screenshots?.contentType ?? "image/png";
-  const ext = ct === "image/jpeg" ? "jpg" : "png";
 
   if (feedbackItem.screenshotPath && screenshots?.screenshotBytes) {
     try {
-      const screenshotFilename = `screenshot.${ext}`;
-      await uploadScreenshotBytes(supabase, screenshots.screenshotBytes, resolvedCompanyId, projectId, feedbackItem.id, screenshotFilename, ct);
-      uploadedScreenshotPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/${screenshotFilename}`;
+      await uploadScreenshotBytes(supabase, screenshots.screenshotBytes, resolvedCompanyId, projectId, feedbackItem.id, "screenshot.png", ct);
+      uploadedScreenshotPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/screenshot.png`;
     } catch (uploadErr) {
       console.warn("[syncFeedbackItem] screenshot upload failed:", uploadErr);
     }
@@ -107,9 +105,8 @@ export async function syncFeedbackItem(
 
   if (feedbackItem.annotatedScreenshotPath && screenshots?.annotatedBytes) {
     try {
-      const annotatedFilename = `annotated.${ext}`;
-      await uploadScreenshotBytes(supabase, screenshots.annotatedBytes, resolvedCompanyId, projectId, feedbackItem.id, annotatedFilename, ct);
-      uploadedAnnotatedPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/${annotatedFilename}`;
+      await uploadScreenshotBytes(supabase, screenshots.annotatedBytes, resolvedCompanyId, projectId, feedbackItem.id, "annotated.png", ct);
+      uploadedAnnotatedPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/annotated.png`;
     } catch (uploadErr) {
       console.warn("[syncFeedbackItem] annotated screenshot upload failed:", uploadErr);
     }
