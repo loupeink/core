@@ -76,6 +76,7 @@ export async function syncFeedbackItem(
   screenshots?: {
     screenshotBytes?: Uint8Array;
     annotatedBytes?: Uint8Array;
+    contentType?: string;
   },
 ): Promise<void> {
   const { data: { user } } = await supabase.auth.getUser();
@@ -91,10 +92,14 @@ export async function syncFeedbackItem(
   let uploadedScreenshotPath: string | undefined;
   let uploadedAnnotatedPath: string | undefined;
 
+  const ct = screenshots?.contentType ?? "image/png";
+  const ext = ct === "image/jpeg" ? "jpg" : "png";
+
   if (feedbackItem.screenshotPath && screenshots?.screenshotBytes) {
     try {
-      await uploadScreenshotBytes(supabase, screenshots.screenshotBytes, resolvedCompanyId, projectId, feedbackItem.id, "screenshot.png");
-      uploadedScreenshotPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/screenshot.png`;
+      const screenshotFilename = `screenshot.${ext}`;
+      await uploadScreenshotBytes(supabase, screenshots.screenshotBytes, resolvedCompanyId, projectId, feedbackItem.id, screenshotFilename, ct);
+      uploadedScreenshotPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/${screenshotFilename}`;
     } catch (uploadErr) {
       console.warn("[syncFeedbackItem] screenshot upload failed:", uploadErr);
     }
@@ -102,8 +107,9 @@ export async function syncFeedbackItem(
 
   if (feedbackItem.annotatedScreenshotPath && screenshots?.annotatedBytes) {
     try {
-      await uploadScreenshotBytes(supabase, screenshots.annotatedBytes, resolvedCompanyId, projectId, feedbackItem.id, "annotated.png");
-      uploadedAnnotatedPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/annotated.png`;
+      const annotatedFilename = `annotated.${ext}`;
+      await uploadScreenshotBytes(supabase, screenshots.annotatedBytes, resolvedCompanyId, projectId, feedbackItem.id, annotatedFilename, ct);
+      uploadedAnnotatedPath = `${resolvedCompanyId}/${projectId}/${feedbackItem.id}/${annotatedFilename}`;
     } catch (uploadErr) {
       console.warn("[syncFeedbackItem] annotated screenshot upload failed:", uploadErr);
     }

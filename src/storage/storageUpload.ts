@@ -13,12 +13,13 @@ export async function uploadScreenshotBytes(
   projectId: string,
   feedbackId: string,
   filename: string = "screenshot.png",
+  contentType: string = "image/png",
 ): Promise<void> {
   const storagePath = `${companyId}/${projectId}/${feedbackId}/${filename}`;
 
   const { error } = await supabase.storage
     .from("screenshots")
-    .upload(storagePath, bytes, { contentType: "image/png", upsert: true });
+    .upload(storagePath, bytes, { contentType, upsert: true });
 
   if (error) {
     throw new Error(`Storage upload failed: ${error.message}`);
